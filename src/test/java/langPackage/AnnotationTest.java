@@ -2,11 +2,16 @@ package langPackage;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.lang.annotation.Annotation;
 
 @DisplayName(value = "dis")
+@
 public class AnnotationTest {
+    @Autowired
+    private AnnotationService annotationService;
+
     @Test
     public void testGetAnnotationInClass(){
         Annotation[] declaredAnnotations = AnnotationTest.class.getDeclaredAnnotations();
