@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BootApplication {
 
     public static void main(String[] args) {
-        System.out.println("-------------begine start bootapplication- will be ok note.------------");
+        System.out.println("----------------begine start bootapplication- will be ok note.------------");
         SpringApplication.run(BootApplication.class, args);
         //------00000
     }
