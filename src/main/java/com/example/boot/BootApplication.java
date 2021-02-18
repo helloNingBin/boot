@@ -10,7 +10,7 @@ public class BootApplication {
         System.out.println("----------------begine start bootapplication- will be ok note.------------");
         SpringApplication.run(BootApplication.class, args);
         //------00000000000
-        //update at home
+        //update at home  keyiliangxi
     }
 
 }
