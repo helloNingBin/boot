@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.lang.annotation.Annotation;
 
 @DisplayName(value = "dis")
-@
 public class AnnotationTest {
     @Autowired
     private AnnotationService annotationService;

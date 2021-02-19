@@ -8,6 +8,7 @@ class BootApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("-----------------------");
     }
 
 }

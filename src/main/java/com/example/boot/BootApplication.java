@@ -11,6 +11,7 @@ public class BootApplication {
         SpringApplication.run(BootApplication.class, args);
         //------00000000000
         //update at home  keyiliangxi
+        System.out.println("----------------end start bootapplication- will be ok note.------------");
     }
 
 }
