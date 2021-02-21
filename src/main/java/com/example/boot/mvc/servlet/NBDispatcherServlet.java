@@ -4,6 +4,7 @@ import com.example.boot.mvc.annotation.NBAutowired;
 import com.example.boot.mvc.annotation.NBController;
 import com.example.boot.mvc.annotation.NBRequestMapping;
 import com.example.boot.mvc.annotation.NBService;
+import tools.CollectionUtil;
 import tools.FileUtil;
 
 import javax.servlet.ServletException;
@@ -62,7 +63,8 @@ public class NBDispatcherServlet extends HttpServlet {
             configContext.load(is);
             String scanPackage = configContext.getProperty("scanPackage");
             doScanner(scanPackage);
-            for (String className : mapping.keySet()) {
+            for (Object key : CollectionUtil.cloneSet(mapping.keySet())) {
+                String className = "" + key;
                 if(!className.contains(".")){continue;}
                 Class<?> clazz = Class.forName(className);
                 if(clazz.isAnnotationPresent(NBController.class)){

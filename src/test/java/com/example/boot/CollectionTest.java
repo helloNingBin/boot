@@ -1,9 +1,9 @@
 package com.example.boot;
 
 import org.junit.jupiter.api.Test;
+import tools.CollectionUtil;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 集合类测试
@@ -14,8 +14,12 @@ public class CollectionTest {
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("1", null);
         map.put("2", null);
-        for(String key : map.keySet()){
-            map.put(key, "dfd");
+        for(Object key : CollectionUtil.cloneSet(map.keySet())){
+            map.put(key+"df", "dfd");
         }
+        System.out.println(map);
+      /*  for(String key : strings){
+            map.put(key+"df", "dfd");
+        }*/
     }
 }
