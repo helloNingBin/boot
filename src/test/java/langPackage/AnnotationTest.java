@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.lang.annotation.Annotation;
 
 @DisplayName(value = "dis")
+@AnnotationRuntime(value = "AnnotionSource")
 public class AnnotationTest {
     @Autowired
     private AnnotationService annotationService;
@@ -18,5 +19,10 @@ public class AnnotationTest {
             System.out.println(annotation.annotationType());
             System.out.println(annotation instanceof DisplayName);
         }
+    }
+
+    @Test
+    public void annotationSource(){
+
     }
 }
