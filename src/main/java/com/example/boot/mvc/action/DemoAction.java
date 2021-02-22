@@ -11,13 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @NBController
-@NBRequestMapping("/nbmvc/demo")
+@NBRequestMapping("/nbmvc3/demo")
 public class DemoAction {
     @NBAutowired
     private IDemoService demoService;
     private IDemoService demoService2;
-    @NBRequestMapping("/query")
-    public void query(HttpServletRequest request, HttpServletResponse response,@NBRequestParam("dname") String name,@NBRequestParam("did") String id){
+    @NBRequestMapping("/query*a")
+    public void query(HttpServletRequest request, HttpServletResponse response,@NBRequestParam("dname") String name,String id){
         String result = null;
         if(demoService != null){
             result = demoService.get(name) + ";id : " + id;
@@ -25,7 +25,7 @@ public class DemoAction {
             result = "name:" + name  + ";id : " + id;
         }
         try {
-            response.getWriter().write(result);
+            response.getWriter().write(result + "------");
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -10,12 +10,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  *
  */
 @Configuration
-public class ServletConfig implements WebMvcConfigurer {
+public class ServletConfiguration implements WebMvcConfigurer {
     /**
      * nbDispatcherServlet2方法名默认是servlet的名称
      */
     @Bean
-    public ServletRegistrationBean nbDispatcherServlet2(){
-        return new ServletRegistrationBean(new ConfigServlet(),"/nbmvc2/*");
+    public ServletRegistrationBean nbDispatcherServlet20(){
+        return new ServletRegistrationBean(new ConfigServlet(),"/cnbmvc2/*");
     }
 }
