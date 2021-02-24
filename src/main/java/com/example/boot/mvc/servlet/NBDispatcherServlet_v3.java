@@ -327,7 +327,10 @@ public class NBDispatcherServlet_v3 extends HttpServlet {
         }
     }
 
-
+    public static void main(String[] args) {
+        NBDispatcherServlet_v3 v = new NBDispatcherServlet_v3();
+        v.doLoadConfig("application.properties");
+    }
     //加载配置文件
     private void doLoadConfig(String contextConfigLocation) {
         //直接从类路径下找到Spring主配置文件所在的路径
