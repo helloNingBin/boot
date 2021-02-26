@@ -50,8 +50,8 @@ public class NBDispatcherServlet_v3 extends HttpServlet {
     //你用Map的话，key，只能是url
     //Handler 本身的功能就是把url和method对应关系，已经具备了Map的功能
     //根据设计原则：冗余的感觉了，单一职责，最少知道原则，帮助我们更好的理解
-    private List<Handler> handlerMapping = new ArrayList<Handler>();
-
+    private List<Handler> handlerMapping = new ArrayList<Handler>()
+;
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         this.doPost(req,resp);

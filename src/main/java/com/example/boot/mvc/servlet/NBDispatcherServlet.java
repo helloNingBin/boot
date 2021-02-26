@@ -39,6 +39,11 @@ public class NBDispatcherServlet extends HttpServlet {
     private List<String> classNames = new ArrayList<>();
     //IOC容器
     private Map<String,Object> ioc = new HashMap<>();
+    //思考：为什么不用Map
+    //你用Map的话，key，只能是url
+    //Handler 本身的功能就是把url和method对应关系，已经具备了Map的功能
+    //根据设计原则：冗余的感觉了，单一职责，最少知道原则，帮助我们更好的理解
+    private List<NBDispatcherServlet_v3.Handler> handlerMapping = new ArrayList<NBDispatcherServlet_v3.Handler>();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {this.doPost(req,resp);}
     @Override
@@ -90,6 +95,31 @@ public class NBDispatcherServlet extends HttpServlet {
      * 给属性注入值
      */
     private void doAutowired() {
+        try {
+            for(Object beanInstance : this.ioc.values()){
+                //判断注解类型
+                if(beanInstance.getClass().isAnnotationPresent(NBController.class)){
+                    //获取带有Autowited注解的属性
+                    Field[] fields = beanInstance.getClass().getDeclaredFields();
+                    for(Field field : fields){
+                        NBAutowired autowired = field.getAnnotation(NBAutowired.class);
+                        if(autowired != null){
+                            //从ioc容器中获取值，赋值给属性
+                            Class<?> fieldType = field.getType();
+                            Object obj = ioc.get(field.getName());
+                            if(obj != null){
+                                field.setAccessible(true);
+                                field.set(beanInstance,obj);
+                            }
+                        }
+                    }
+
+                }
+
+            }
+        }catch (Exception e){
+
+        }
     }
 
     /**
@@ -161,5 +191,7 @@ public class NBDispatcherServlet extends HttpServlet {
             classNames.add(clazzName);
         }
     }
+    public class Handler{
 
+    }
 }
