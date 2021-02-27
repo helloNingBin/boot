@@ -80,7 +80,7 @@ public class NBDispatcherServlet extends HttpServlet {
             doAutowired();
 
             //5、初始化HandlerMapping
-            initHandlerMapping();
+          //  initHandlerMapping();
 
             System.out.println("NB Spring framework is init.");
         } catch (Exception e) {
@@ -177,6 +177,8 @@ public class NBDispatcherServlet extends HttpServlet {
     public static void main(String[] args) {
 
     }
+
+
     private void doScanner(String scanPackage) {
         //注意：不能以“/”开头
         String path = scanPackage.replaceAll("\\.","/");

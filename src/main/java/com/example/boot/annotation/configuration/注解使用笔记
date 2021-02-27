@@ -1,0 +1,39 @@
+1.configuration: 标记为注解类
+2.Scope和Bean
+   使用方法：com.example.boot.annotation.configuration.MyConfig
+3.ComponentScan：扫描
+  使用方法：MyComponentScan
+    自定义的扫描过滤器：MyTypeFilter
+4.lazy：IOC默认非延时加载，容器初始化时就已经创建。加上lazy注解后，在使用bean时才加载放进容器。
+        注意lazy只对单例有效，对于多例是无效的。因为多例每次调用都会重新创建
+5.Conditaional：按一定的条件进行判断，满足条件就给容器注册bean。
+            使用方法：com.example.boot.annotation.configuration.MyConfig  要实现Condition接口，在里写判断逻辑
+6.Import：导入外部资源（这些就不花时间去实践了，等需要时再查阅资料）
+        直接用在Config的类上，就可以加入容器了。
+     给IOC容器注册Bean的方式
+     1.@Bean导入单个类
+     2.@ComponentScan默认扫描（@Controller、@Service、Repostory、@Component）
+     3.Import快速给容器导入Bean的方式
+        a.@Import直接参数导入
+        b.ImportSelector 自定义规则实现
+        c.实现ImportBeanDefinitionRegister，获得BeanDefinitionRegistry可以手动直接往IOC容器中塞
+7.生命周期控制
+  @PostContruct:用于指定初始化方法（用在方法上）
+  @PreDestory用于指定销毁方法（用在方法上）
+  @DependsOn：定义Bean初始化及销毁时的顺序
+--------------------------赋值组件---------------------------
+@Component：泛指组件，当组件不好归类的时候，我们可以使用这个注解进行标
+@Service：用于标注业务层组件
+@Controller：用于标控制层组件
+@Repostory：用于标注数据访问组件，即DAO组件
+@Value：普通数据类型赋值,也支持spring el表达式
+     @Value("ningbin")              @Value("#{8-5}")      @Value("${从配置文件中读取，前提是配置文件已被spring加载（@PropertySource）}")
+     private String name;           private int aget;     private String name;
+@Autowired：默认按类型装配，如果我们想使用按名称装配，可以结合@Qualifier注解一起使用,Qualifier的优先级更高
+@PropertySource：读取配置文件赋值
+      @PropertySource("classpath:db.properties")
+      public class MyConfig{}
+
+@Qualifier：如存在多个实例配合使用
+@primary：自动装配时出现多个Bean候选者时，被注解为@Primary的Bean将作为首选者，否则将抛出异常
+@Resource：默认名称装配，当找不到与名称匹配的bean才会按类型装配
