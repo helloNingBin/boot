@@ -1,4 +1,4 @@
-package com.example.boot.mvc.servlet;
+package com.example.boot.mvc2.servlet;
 
 import com.example.boot.annotation.*;
 import tools.FileUtil;

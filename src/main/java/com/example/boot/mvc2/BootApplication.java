@@ -1,4 +1,4 @@
-package com.example.boot;
+package com.example.boot.mvc2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

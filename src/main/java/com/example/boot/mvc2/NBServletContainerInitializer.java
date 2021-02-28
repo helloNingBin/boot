@@ -1,4 +1,4 @@
-package com.example.boot;
+package com.example.boot.mvc2;
 
 import javax.servlet.ServletContainerInitializer;
 import javax.servlet.ServletContext;

@@ -1,4 +1,4 @@
-package com.example.boot;
+package com.example.boot.mvc;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

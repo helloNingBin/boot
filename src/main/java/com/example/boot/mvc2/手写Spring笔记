@@ -1,0 +1,7 @@
+ApplicationContext可以获取Bean，那么这个ApplicationContext又是从何而来的呢？
+
+V2的模块结构
+  beans（配置封装）模块
+  context(IOC容器)模块
+
+1.IOC和DI在core和beans包中

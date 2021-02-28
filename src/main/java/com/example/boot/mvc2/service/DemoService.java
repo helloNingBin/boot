@@ -1,7 +1,8 @@
-package com.example.boot.mvc.service;
+package com.example.boot.mvc2.service;
 
 import com.example.boot.annotation.NBService;
-import com.example.boot.mvc.service.inter.IDemoService;
+import com.example.boot.mvc2.service.inter.IDemoService;
+
 @NBService
 public class DemoService implements IDemoService {
     @Override

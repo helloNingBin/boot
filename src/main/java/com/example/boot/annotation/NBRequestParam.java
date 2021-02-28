@@ -1,4 +1,4 @@
-package com.example.boot.mvc.annotation;
+package com.example.boot.annotation;
 
 import java.lang.annotation.*;
 

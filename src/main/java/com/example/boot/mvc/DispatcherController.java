@@ -1,4 +1,4 @@
-package com.example.boot;
+package com.example.boot.mvc;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

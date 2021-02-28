@@ -1,10 +1,10 @@
-package com.example.boot.mvc.action;
+package com.example.boot.mvc2.action;
 
 import com.example.boot.annotation.NBAutowired;
 import com.example.boot.annotation.NBController;
 import com.example.boot.annotation.NBRequestMapping;
 import com.example.boot.annotation.NBRequestParam;
-import com.example.boot.mvc.service.inter.IDemoService;
+import com.example.boot.mvc2.service.inter.IDemoService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
