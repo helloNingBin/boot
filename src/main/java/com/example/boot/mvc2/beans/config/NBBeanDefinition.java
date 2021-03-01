@@ -7,7 +7,7 @@ public class NBBeanDefinition {
     private String beanClassName;
     private String factoryBeanName;
 
-    public NBBeanDefinition(String beanClassName, String factoryBeanName) {
+    public NBBeanDefinition(String factoryBeanName, String beanClassName) {
         this.beanClassName = beanClassName;
         this.factoryBeanName = factoryBeanName;
     }

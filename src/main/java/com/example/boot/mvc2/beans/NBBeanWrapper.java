@@ -5,6 +5,11 @@ public class NBBeanWrapper {
     //代理？
     private Class<?> wrappedClass;
 
+    public NBBeanWrapper(Object instance) {
+        this.wrappedInstance = instance;
+        this.wrappedClass = instance.getClass();
+    }
+
     public Object getWrappedInstance() {
         return wrappedInstance;
     }
