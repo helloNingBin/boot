@@ -31,20 +31,17 @@ public class NBHandlerAdapter {
             }else if(paramterType == String.class){
                 //通过运行时的状态去拿到你
                 Annotation[] [] pa = method.getParameterAnnotations();
-                for (int j = 0; j < pa.length ; j ++) {
-                    for(Annotation a : pa[i]){
-                        if(a instanceof NBRequestParam){
-                            String paramName = ((NBRequestParam) a).value();
-                            if(!"".equals(paramName.trim())){
-                                String value = Arrays.toString(params.get(paramName))
-                                        .replaceAll("\\[|\\]","")
-                                        .replaceAll("\\s+",",");
-                                paramValues[i] = value;
-                            }
+                for(Annotation a : pa[i]){
+                    if(a instanceof NBRequestParam){
+                        String paramName = ((NBRequestParam) a).value();
+                        if(!"".equals(paramName.trim())){
+                            String value = Arrays.toString(params.get(paramName))
+                                    .replaceAll("\\[|\\]","")
+                                    .replaceAll("\\s+",",");
+                            paramValues[i] = value;
                         }
                     }
                 }
-
             }
         }
     }
