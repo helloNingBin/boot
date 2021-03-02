@@ -1,11 +1,16 @@
 package tools;
 
+import com.example.boot.annotation.NBRequestParam;
+import org.springframework.util.StringUtils;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -25,11 +30,26 @@ public class WebUtil {
                 paramterArray[index] = session;
             }else{
                 //TODO 这里要逐个判断每一个类型吗？
-                String[] values = paramMap.get(p.getName());
+                String paramName = p.getName();
+                String defaultParamValue = null;
+                //通过运行时的状态去拿到你
+                Annotation[] [] pa = method.getParameterAnnotations();
+                for(Annotation a : pa[index]){
+                    if(a instanceof NBRequestParam){
+                        String defaultParamName = ((NBRequestParam) a).value();
+                        if(defaultParamName != null && !"".equals(defaultParamName.trim())){
+                            paramName = defaultParamName;
+                        }
+                        defaultParamValue =   ((NBRequestParam) a).defalutValue();
+                        break;
+                    }
+                }
+
+                String[] values = paramMap.get(paramName);
                 if(values != null){
                     paramterArray[index] = p.getType().getConstructor(String.class).newInstance(values[0]);
                 }else{
-                    parameters[index] = null;
+                    paramterArray[index] = StringUtils.isEmpty(defaultParamValue) ? null : p.getType().getConstructor(String.class).newInstance(defaultParamValue);
                 }
             }
             index++;
