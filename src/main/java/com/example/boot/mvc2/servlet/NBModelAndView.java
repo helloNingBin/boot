@@ -13,7 +13,9 @@ public class NBModelAndView {
         this.viewName = viewName;
         this.model = model;
     }
-
+    public NBModelAndView(String viewName) {
+        this.viewName = viewName;
+    }
     public String getViewName() {
         return viewName;
     }

@@ -1,7 +1,6 @@
 package com.example.boot.mvc2.beans.support;
 
 import com.example.boot.mvc2.beans.config.NBBeanDefinition;
-import com.example.boot.mvc2.servlet.NBDispatcherServlet;
 import tools.FileUtil;
 import tools.StringUtil;
 
@@ -41,6 +40,7 @@ public class NBBeanDefinitionReader {
                 //接口
                 for (Class<?> i : beanClass.getInterfaces()){
                     result.add(doCreateBeanDefinition(i.getName(), beanClass.getName()));
+                    System.out.println(className + "-----------" + i.getName() + "--------" + beanClass.getName());
                 }
             }
         }catch (Exception e){
@@ -48,6 +48,12 @@ public class NBBeanDefinitionReader {
         }
         return result;
     }
+
+    /**
+     * @param beanName       别名（IOC里的名称）
+     * @param beanClassName  类名
+     * @return
+     */
     private NBBeanDefinition doCreateBeanDefinition(String beanName,String beanClassName){
         NBBeanDefinition beanDefinition = new NBBeanDefinition(beanName, beanClassName);
         return beanDefinition;
@@ -56,7 +62,7 @@ public class NBBeanDefinitionReader {
     private void doScanner(String scanPackage) {
         String path = scanPackage.replaceAll("\\.","/");
         System.out.println("path:" + path);
-        URL url = NBDispatcherServlet.class.getClassLoader().getResource(path);
+        URL url = NBBeanDefinitionReader.class.getClassLoader().getResource(path);
         File classDir = new File(url.getFile());
         List<File> fileList = new ArrayList<File>();
         fileList = FileUtil.findAllList(classDir, fileList,".class");
@@ -85,5 +91,9 @@ public class NBBeanDefinitionReader {
                 }
             }
         }
+    }
+
+    public Properties getConfig() {
+        return this.contextConfig;
     }
 }

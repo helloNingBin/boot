@@ -7,6 +7,10 @@ public class NBBeanDefinition {
     private String beanClassName;
     private String factoryBeanName;
 
+    /**
+     * @param factoryBeanName   别名（IOC里的名称）
+     * @param beanClassName     类名
+     */
     public NBBeanDefinition(String factoryBeanName, String beanClassName) {
         this.beanClassName = beanClassName;
         this.factoryBeanName = factoryBeanName;

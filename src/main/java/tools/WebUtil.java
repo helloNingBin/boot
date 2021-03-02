@@ -17,7 +17,9 @@ import java.util.Map;
  * web相关的工具
  */
 public class WebUtil {
-    public static Object[] getRequestPramArray(Map<String,String[]> paramMap, Method method,HttpServletRequest request,HttpServletResponse response,HttpSession session)throws Exception{
+    public static Object[] getRequestPramArray( Method method,HttpServletRequest request,HttpServletResponse response)throws Exception{
+        Map<String,String[]> paramMap = request.getParameterMap();
+        HttpSession session = request.getSession();
         Parameter[] parameters = method.getParameters();
         Object[] paramterArray = new Object[parameters.length];
         int index = 0;

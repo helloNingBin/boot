@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class NBHandlerMapping {
     private Pattern pattern;//URL
     private Method method;//对应的method
-    private  Object controller;//Method对应的实例对象
+    private Object controller;//Method对应的实例对象
 
     public NBHandlerMapping() {
     }
@@ -41,7 +41,7 @@ public class NBHandlerMapping {
         this.controller = controller;
     }
 
-    public NBHandlerMapping(Pattern pattern, Method method, Object controller) {
+    public NBHandlerMapping(Pattern pattern, Object controller, Method method) {
         this.pattern = pattern;
         this.method = method;
         this.controller = controller;

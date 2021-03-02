@@ -23,4 +23,8 @@ public class ConfigServlet extends HttpServlet {
         response.getWriter().flush();
         response.getWriter().close();
     }
+
+    public static void main(String[] args) {
+        System.out.println(System.currentTimeMillis());
+    }
 }

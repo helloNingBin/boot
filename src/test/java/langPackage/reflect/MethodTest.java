@@ -29,8 +29,8 @@ public class MethodTest {
         Map<String,Object> webParamMap = new HashMap<String,Object>();
         for(Method method : methods){
             if(method.getName().equals("show")){
-                Object[] requestPramArray = WebUtil.getRequestPramArray(paramMap, method,null,null,null);
-                System.out.println(requestPramArray);
+                /*Object[] requestPramArray = WebUtil.getRequestPramArray(paramMap, method,null,null,null);
+                System.out.println(requestPramArray);*/
             }
         }
     }

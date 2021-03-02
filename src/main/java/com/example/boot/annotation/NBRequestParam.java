@@ -7,5 +7,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface NBRequestParam {
     String value() default "";
-    String defalutValue();
+    String defalutValue() default "";
 }

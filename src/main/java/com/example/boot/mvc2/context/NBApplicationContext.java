@@ -12,6 +12,7 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 /**
  * 按之前源码分析的套路，IOC、ID、MVC、AOP
@@ -59,7 +60,7 @@ public class NBApplicationContext {
         }
     }
     //Bean的实例化，DI是从这个方法开始的
-    private void getBean(String beanName) {
+    public Object getBean(String beanName) {
         //1.先拿到BeanDefinition配置信息
         NBBeanDefinition beanDefinition = this.beanDefinitionMap.get(beanName);
         //2.反射实例化newInstance
@@ -70,6 +71,8 @@ public class NBApplicationContext {
         this.factoryBeanInstanceCache.put(beanName, beanWrapper);
         //5.执行依赖注入
         populateBean(beanName,beanDefinition,beanWrapper);
+
+        return beanWrapper.getWrappedInstance();
     }
 
     private void populateBean(String beanName, NBBeanDefinition beanDefinition, NBBeanWrapper beanWrapper) {
@@ -141,5 +144,20 @@ public class NBApplicationContext {
             this.beanDefinitionMap.put(beanDefinition.getBeanClassName(),beanDefinition);
             this.beanDefinitionMap.put(beanDefinition.getFactoryBeanName(),beanDefinition);
         }
+    }
+    public Object getBean(Class beanClass){
+        return getBean(beanClass.getName());
+    }
+
+    public int getBeanDefinitionCount() {
+        return this.beanDefinitionMap.size();
+    }
+
+    public String[] getBeanDefinitionNames() {
+        return this.beanDefinitionMap.keySet().toArray(new String[this.beanDefinitionMap.size()]);
+    }
+
+    public Properties getConfig() {
+        return this.reader.getConfig();
     }
 }
