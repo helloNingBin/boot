@@ -1,6 +1,6 @@
 package tools;
 
-import com.example.boot.annotation.NBRequestParam;
+import com.example.boot.annotation.*;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,6 +59,23 @@ public class WebUtil {
         return paramterArray;
     }
 
+    /**
+     * 判断是否自定义的注解
+     */
+    public static boolean isNBAnnotation(Annotation annotation){
+        if(annotation instanceof NBController || annotation instanceof NBService){
+            return true;
+        }
+        return false;
+    }
+    public static boolean isNBAnnotation(Annotation[] annotations){
+        for(Annotation annotation : annotations){
+            if(isNBAnnotation(annotation)){
+                return true;
+            }
+        }
+        return false;
+    }
     public static void main(String[] args) {
 
     }

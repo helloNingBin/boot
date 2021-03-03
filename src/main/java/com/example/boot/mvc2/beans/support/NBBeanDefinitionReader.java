@@ -3,10 +3,12 @@ package com.example.boot.mvc2.beans.support;
 import com.example.boot.mvc2.beans.config.NBBeanDefinition;
 import tools.FileUtil;
 import tools.StringUtil;
+import tools.WebUtil;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,11 @@ public class NBBeanDefinitionReader {
         try {
             for(String className : regitryBeanClasses){
                 Class<?> beanClass = Class.forName(className);
+                Annotation[] annotations = beanClass.getDeclaredAnnotations();
+                //只加载有注解的类
+                if(!WebUtil.isNBAnnotation(annotations)){
+                    continue;
+                }
                 result.add(doCreateBeanDefinition(StringUtil.toLowerFirstCase(beanClass.getSimpleName()), beanClass.getName()));
                 //接口
                 for (Class<?> i : beanClass.getInterfaces()){

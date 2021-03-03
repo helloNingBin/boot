@@ -42,6 +42,7 @@ public class NBApplicationContext {
         try {
             //2.解析配置文件，封装成BeanDefinition
             List<NBBeanDefinition> beanDefinitions = reader.loadBeanDefinitions();
+            System.out.println(beanDefinitions);
             //3.把BeanDefinition缓存起来
             doRegistBeanDefinition(beanDefinitions);
 
@@ -49,6 +50,7 @@ public class NBApplicationContext {
         }catch (Exception e){
             e.printStackTrace();
         }
+        System.out.println();
     }
 
     private void doAutowrited() {
@@ -69,6 +71,16 @@ public class NBApplicationContext {
         NBBeanWrapper beanWrapper = new NBBeanWrapper(instance);
         //4.保存到IOC容器
         this.factoryBeanInstanceCache.put(beanName, beanWrapper);
+        Class<?>[] interfaces = instance.getClass().getInterfaces();
+        if(interfaces.length > 0){
+            //接口
+            for (Class<?> i : interfaces){
+                //3.封装成一个叫做BeanWrapper
+                beanWrapper = new NBBeanWrapper(instance);
+                //4.保存到IOC容器
+                this.factoryBeanInstanceCache.put(i.getName(), beanWrapper);
+            }
+        }
         //5.执行依赖注入
         populateBean(beanName,beanDefinition,beanWrapper);
 
@@ -137,8 +149,8 @@ public class NBApplicationContext {
 
     private void doRegistBeanDefinition(List<NBBeanDefinition> beanDefinitions) {
         for(NBBeanDefinition beanDefinition : beanDefinitions){
-            if(this.beanDefinitionMap.containsKey(beanDefinition.getBeanClassName())){
-                throw new BeanExpressionException(beanDefinition.getBeanClassName() + " is exists!");
+            if(this.beanDefinitionMap.containsKey(beanDefinition.getFactoryBeanName())){
+                throw new BeanExpressionException(beanDefinition.getFactoryBeanName() + " is exists!");
             }
             //全类名和别名都一起放进去
             this.beanDefinitionMap.put(beanDefinition.getBeanClassName(),beanDefinition);

@@ -12,6 +12,9 @@ public class NBBeanDefinition {
      * @param beanClassName     类名
      */
     public NBBeanDefinition(String factoryBeanName, String beanClassName) {
+        if("com.example.boot.mvc2.config.CommonConfig".equals(factoryBeanName)){
+            System.out.println(beanClassName);
+        }
         this.beanClassName = beanClassName;
         this.factoryBeanName = factoryBeanName;
     }
@@ -25,6 +28,14 @@ public class NBBeanDefinition {
 
     public void setBeanClassName(String beanClassName) {
         this.beanClassName = beanClassName;
+    }
+
+    @Override
+    public String toString() {
+        return "NBBeanDefinition{" +
+                "beanClassName='" + beanClassName + '\'' +
+                ", factoryBeanName='" + factoryBeanName + '\'' +
+                '}';
     }
 
     public String getFactoryBeanName() {
