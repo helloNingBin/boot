@@ -32,8 +32,9 @@ public class NBView {
             while (matcher.find()){
                 String paramName = matcher.group();
                 paramName = paramName.replaceAll("￥\\{|\\}","");
-                Object paramValue = model.get(paramName);
-                line = matcher.replaceFirst(makeStringForRegExp(paramValue.toString()));
+                String paramValue = model.get(paramName) == null ? "" : model.get(paramName).toString();
+                paramValue += "---";
+                line = matcher.replaceFirst(makeStringForRegExp(paramValue + "dfd"));
                 matcher = pattern.matcher(line);
             }
             sb.append(line);

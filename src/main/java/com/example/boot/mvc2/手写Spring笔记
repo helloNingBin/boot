@@ -5,3 +5,14 @@ V2的模块结构
   context(IOC容器)模块
 
 1.IOC和DI在core和beans包中
+
+ApplicationContext   :简单地理解 为它就是工厂类
+getBean() 从IOC容器中去获取一个实例的方法
+在调用Servlet的init()方法时，就要初始化ApplicationContext
+
+IOC容器里的实例默认是单例，而且是延时加载（Lzay）的，
+DI是在初始化以后发生的。
+
+Spring中发生DI由getBean()触发
+1、调用getBean()创建对象
+2、立即就会发生DI
