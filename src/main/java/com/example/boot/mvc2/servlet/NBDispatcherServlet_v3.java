@@ -156,6 +156,9 @@ public class NBDispatcherServlet_v3 extends HttpServlet {
         if(this.applicationContext.getBeanDefinitionCount() == 0){ return;}
 
         for (String beanName : this.applicationContext.getBeanDefinitionNames()) {
+            if(beanName.equals("demoAction")){
+                System.out.println("");
+            }
             Object instance = applicationContext.getBean(beanName);
             Class<?> clazz = instance.getClass();
 

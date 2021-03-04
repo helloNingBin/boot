@@ -11,9 +11,8 @@ public class AnnotationTest {
     @Test
     public void configurationTest(){
         ApplicationContext app = new AnnotationConfigApplicationContext(MyConfig.class);
-        Persion getPersionConfig = (Persion) app.getBean("ningbin");
-        System.out.println(getPersionConfig);
-        Persion bean = app.getBean(Persion.class);
-        System.out.println(getPersionConfig == bean);
+        System.out.println(app);
+        ApplicationContext app2 = new AnnotationConfigApplicationContext(MyConfig.class);
+        System.out.println(app2);
     }
 }

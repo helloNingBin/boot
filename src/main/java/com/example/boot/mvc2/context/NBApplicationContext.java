@@ -100,7 +100,7 @@ public class NBApplicationContext {
         Class<?> clazz = beanWrapper.getWrappedClass();
 
         //相当于在Spring中@Component
-        if(!clazz.isAnnotationPresent(NBController.class) || !clazz.isAnnotationPresent(NBService.class)){
+        if(!clazz.isAnnotationPresent(NBController.class) && !clazz.isAnnotationPresent(NBService.class)){
             return;
         }
         //把所有的包括private/protected/default/public修饰字段都取出来
@@ -119,10 +119,11 @@ public class NBApplicationContext {
             field.setAccessible(true);
 
             try {
+                //key:com.example.boot.mvc2.service.inter.IDemoService is null?
                 if(this.factoryBeanInstanceCache.get(autowiredBeanName) == null){
                     continue;
                 }
-                field.set(instance, this.factoryBeanInstanceCache.get(autowiredBeanName));
+                field.set(instance, this.factoryBeanInstanceCache.get(autowiredBeanName).getWrappedInstance());
             }catch (Exception e){
                 e.printStackTrace();
             }
