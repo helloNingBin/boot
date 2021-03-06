@@ -7,6 +7,7 @@ import com.example.boot.mvc2.service.inter.IDemoService;
 public class DemoService implements IDemoService {
     @Override
     public String get(String name) {
+        name.substring(44,3333);
         return "My name is " + name;
     }
 

@@ -5,7 +5,8 @@ import lombok.Data;
 import java.lang.reflect.Method;
 
 /**
- *
+ *切面的类
+ * 如记录日志、开启事务等
  */
 @Data
 public class NBAdvice {
