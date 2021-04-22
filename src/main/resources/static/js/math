@@ -1,0 +1,30 @@
+var math_random_value = 0;//随机数
+var chordNames = ["C","D","E","F","G","A","B","Cm","Dm","Em","Fm","Gm","Am","Bm","bD","bE","bG","bA","bB","bDm","bEm","bGm","bAm","bBm"];
+var cacheArray = new Array();
+var cacheArrayLength = 12;
+function getRandomValue(val) {
+    refreshArray();
+    //从0至val
+   var r = Math.random() * val;
+   //判断是否存在缓存数组中，缓存的话，重新读取随机数
+    var isContail = contailArary(r);
+    if(isContail){
+        getRandomValue(val)
+    }else{
+        cacheArray.push(r);
+        return r;
+    }
+}
+function refreshArray() {
+    if (cacheArray.length == cacheArrayLength){
+        cacheArray = new cacheArray();
+    }
+}
+function contailArary(val) {
+    for (var i in cacheArray){
+        if(cacheArray[i] == val){
+            return true;
+        }
+    }
+    return false;
+}

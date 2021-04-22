@@ -58,7 +58,7 @@ public class NBApplicationContext {
 
     private void doAutowrited() {
         //调用getBean()
-        //这一步，所有的Bean并没有真正的实例化，还只是配置阶段。。
+        //这一步，所有的Bean并没有真正的实例化，还只是配置阶段。。先把对象放到缓存中，等真正getBean时，再执行依赖注入，因为这时才能保存每个对象都不为空
         for(Map.Entry<String,NBBeanDefinition> entry : this.beanDefinitionMap.entrySet()){
             String beanName = entry.getKey();
             getBean(beanName);
