@@ -3,9 +3,23 @@ package com.example.boot.bean;
 public class Persion {
     private String name;
     private int age;
+    private Car car;
 
     public Persion() {
     }
+
+    public Persion(Car car) {
+        this.car = car;
+    }
+
+    public Car getCar() {
+        return car;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
     public void starDay(){
         System.out.println("star a new day........");
     }
@@ -14,13 +28,6 @@ public class Persion {
     }
     public void sleep(){
         System.out.println("go to sleep...........");
-    }
-    @Override
-    public String toString() {
-        return "Persion{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                '}';
     }
 
     public Persion(String name, int age) {
