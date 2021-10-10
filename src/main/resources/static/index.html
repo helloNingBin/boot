@@ -3,54 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>boot index</title>
+    <script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.js"></script>
 </head>
 <body>
    <h1>..................0000..</h1>
    <h1 id="h" style="font-size: xx-large" ></h1>
 </body>
 <script type="text/javascript">
-    document.getElementById("t").getAttribute("value");
-    var math_random_value = 0;//随机数
-    var chordNames = ["C","D","E","F","G","A","B","Cm","Dm","Em","Fm","Gm","Am","Bm","bD","bE","bG","bA","bB","bDm","bEm","bGm","bAm","bBm"];
-    var cacheArray = new Array();
-    var cacheArrayLength = 12;
-    function getRandomValue(val) {
-        refreshArray();
-        //从0至val
-        var r = Math.floor(Math.random() * val);
-        //判断是否存在缓存数组中，缓存的话，重新读取随机数
-        var isContail = contailArary(r);
-        if(isContail){
-            getRandomValue(val)
-        }else{
-            cacheArray.push(r);
-            return r;
-        }
-    }
-    function refreshArray() {
-        if (cacheArray.length == cacheArrayLength){
-            cacheArray = new Array();
-        }
-    }
-    function contailArary(val) {
-        for (var i in cacheArray){
-            if(cacheArray[i] == val){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-
-
-    for(var i = 0; i < 16;i++){
-        var r = getRandomValue(24);
-        console.info(r);
-    }
-
-
-
+   $(function () {
+      var es = new EventSource("/es?deviceNO=cp&index=3");
+      es.addEventListener("open",function (e) {
+          $("#h").append("open:" + e);
+      }, false);
+       es.addEventListener("message",function (e) {
+           $("#h").append("message:" + e.data);
+       })
+       es.addEventListener("don",function (e) {
+           $("#h").append("don:" + e.data);
+       })
+       es.addEventListener("error",function (e) {
+           $("#h").append("error:" + e);
+           console.info(e);
+           es.close();
+       }, false);
+       es.addEventListener("cls",function (e) {
+           $("#h").append("cls:" + e);
+           es.close();
+       })
+   })
 
 </script>
 </html>
