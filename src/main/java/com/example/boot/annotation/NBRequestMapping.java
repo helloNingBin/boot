@@ -7,4 +7,5 @@ import java.lang.annotation.*;
 @Documented
 public @interface NBRequestMapping {
     String value() default "";
+    String methodType() default "";
 }

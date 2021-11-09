@@ -37,6 +37,7 @@ public class NBBeanDefinitionReader {
         List<NBBeanDefinition> result = new ArrayList<>();
         try {
             for(String className : regitryBeanClasses){
+                System.out.println("className:" + className);
                 Class<?> beanClass = Class.forName(className);
                 Annotation[] annotations = beanClass.getDeclaredAnnotations();
                 //只加载有注解的类

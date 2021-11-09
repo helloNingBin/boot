@@ -18,7 +18,8 @@ public class NBAdvice {
         this.aspect = aspect;
         this.adviceMethod = adviceMethod;
     }
-
+    public NBAdvice() {
+    }
     public Object getAspect() {
         return aspect;
     }
