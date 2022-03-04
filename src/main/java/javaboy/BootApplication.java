@@ -1,11 +1,11 @@
-package com.example.boot.mvc2;
+package javaboy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
-/*@SpringBootApplication
-@ServletComponentScan*/
+@SpringBootApplication
+@ServletComponentScan
 public class BootApplication {
 
     public static void main(String[] args) {

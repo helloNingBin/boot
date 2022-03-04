@@ -37,7 +37,7 @@ public class FileUtil {
     }
 
     public static void main(String[] args) throws IOException {
-        splitTextFile("C:\\Users\\chichao\\Desktop\\log\\catalina.out","C:\\Users\\chichao\\Desktop\\log\\t",100);
+        splitTextFile("C:\\Users\\chichao\\Desktop\\共享童车\\收银端日志\\catalina.out","C:\\Users\\chichao\\Desktop\\共享童车\\收银端日志\\t",100);
     }
 
     /**
