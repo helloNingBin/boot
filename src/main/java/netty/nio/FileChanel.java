@@ -3,9 +3,11 @@ package netty.nio;
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 
 /**
@@ -15,7 +17,7 @@ import java.nio.channels.SocketChannel;
 public class FileChanel {
 
     public static void main(String[] args) throws Exception{
-        socketChanel();
+        serverSocket();
     }
 
     static void t1()throws Exception{
@@ -61,7 +63,17 @@ public class FileChanel {
         while (byteBuffer.hasRemaining()){
             System.out.println(byteBuffer.get());
         }
-
         socketChannel.close();
+    }
+    static void serverSocket()throws Exception{
+        ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+        serverSocketChannel.socket().bind(new InetSocketAddress(6666));
+        serverSocketChannel.configureBlocking(false);
+        while (true){
+            System.out.println("waiting new connet");
+            SocketChannel socketChannel = serverSocketChannel.accept();
+            System.out.println("connect come.socketChannel:"  + socketChannel);
+
+        }
     }
 }

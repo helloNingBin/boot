@@ -33,7 +33,7 @@ public class BootMqttMsgBack {
         MqttFixedHeader mqttFixedHeaderBack = new MqttFixedHeader(MqttMessageType.CONNACK,mqttFixedHeaderInfo.isDup(), MqttQoS.AT_MOST_ONCE, mqttFixedHeaderInfo.isRetain(), 0x02);
         //	构建CONNACK消息体
         MqttConnAckMessage connAck = new MqttConnAckMessage(mqttFixedHeaderBack, mqttConnAckVariableHeaderBack);
-        log.info("back--"+connAck.toString());
+        log.info("connack back--"+connAck.toString());
         channel.writeAndFlush(connAck);
     }
 
@@ -61,7 +61,7 @@ public class BootMqttMsgBack {
                 MqttFixedHeader mqttFixedHeaderBack = new MqttFixedHeader(MqttMessageType.PUBACK,mqttFixedHeaderInfo.isDup(), MqttQoS.AT_MOST_ONCE, mqttFixedHeaderInfo.isRetain(), 0x02);
                 //	构建PUBACK消息体
                 MqttPubAckMessage pubAck = new MqttPubAckMessage(mqttFixedHeaderBack, mqttMessageIdVariableHeaderBack);
-                log.info("back--"+pubAck.toString());
+                log.info("puback back--"+pubAck.toString());
                 channel.writeAndFlush(pubAck);
                 break;
             case EXACTLY_ONCE:		//	刚好一次
@@ -70,7 +70,7 @@ public class BootMqttMsgBack {
                 //	构建返回报文， 可变报头
                 MqttMessageIdVariableHeader mqttMessageIdVariableHeaderBack2 = MqttMessageIdVariableHeader.from(mqttPublishMessage.variableHeader().packetId());
                 MqttMessage mqttMessageBack = new MqttMessage(mqttFixedHeaderBack2,mqttMessageIdVariableHeaderBack2);
-                log.info("back--"+mqttMessageBack.toString());
+                log.info("puback back--"+mqttMessageBack.toString());
                 channel.writeAndFlush(mqttMessageBack);
                 break;
             default:
@@ -90,7 +90,7 @@ public class BootMqttMsgBack {
         //	构建返回报文， 可变报头
         MqttMessageIdVariableHeader mqttMessageIdVariableHeaderBack = MqttMessageIdVariableHeader.from(messageIdVariableHeader.messageId());
         MqttMessage mqttMessageBack = new MqttMessage(mqttFixedHeaderBack,mqttMessageIdVariableHeaderBack);
-        log.info("back--"+mqttMessageBack.toString());
+        log.info("pubcomp back--"+mqttMessageBack.toString());
         channel.writeAndFlush(mqttMessageBack);
     }
 
@@ -105,7 +105,7 @@ public class BootMqttMsgBack {
         //	构建返回报文， 可变报头
         MqttMessageIdVariableHeader variableHeaderBack = MqttMessageIdVariableHeader.from(messageIdVariableHeader.messageId());
         Set<String> topics = mqttSubscribeMessage.payload().topicSubscriptions().stream().map(mqttTopicSubscription -> mqttTopicSubscription.topicName()).collect(Collectors.toSet());
-        //log.info(topics.toString());
+       log.info("topics:" + topics.toString());
         List<Integer> grantedQoSLevels = new ArrayList<>(topics.size());
         for (int i = 0; i < topics.size(); i++) {
             grantedQoSLevels.add(mqttSubscribeMessage.payload().topicSubscriptions().get(i).qualityOfService().value());
@@ -116,7 +116,7 @@ public class BootMqttMsgBack {
         MqttFixedHeader mqttFixedHeaderBack = new MqttFixedHeader(MqttMessageType.SUBACK, false, MqttQoS.AT_MOST_ONCE, false, 2+topics.size());
         //	构建返回报文	订阅确认
         MqttSubAckMessage subAck = new MqttSubAckMessage(mqttFixedHeaderBack,variableHeaderBack, payloadBack);
-        log.info("back--"+subAck.toString());
+        log.info("suback back--"+subAck.toString());
         channel.writeAndFlush(subAck);
     }
 
@@ -133,7 +133,7 @@ public class BootMqttMsgBack {
         MqttFixedHeader mqttFixedHeaderBack = new MqttFixedHeader(MqttMessageType.UNSUBACK, false, MqttQoS.AT_MOST_ONCE, false, 2);
         //	构建返回报文	取消订阅确认
         MqttUnsubAckMessage unSubAck = new MqttUnsubAckMessage(mqttFixedHeaderBack,variableHeaderBack);
-        log.info("back--"+unSubAck.toString());
+        log.info("unsuback back--"+unSubAck.toString());
         channel.writeAndFlush(unSubAck);
     }
 
@@ -146,7 +146,7 @@ public class BootMqttMsgBack {
         //	心跳响应报文	11010000 00000000  固定报文
         MqttFixedHeader fixedHeader = new MqttFixedHeader(MqttMessageType.PINGRESP, false, MqttQoS.AT_MOST_ONCE, false, 0);
         MqttMessage mqttMessageBack = new MqttMessage(fixedHeader);
-        log.info("back--"+mqttMessageBack.toString());
+        log.info("pingresp back--"+mqttMessageBack.toString());
         channel.writeAndFlush(mqttMessageBack);
     }
 

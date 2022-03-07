@@ -21,7 +21,7 @@ public class BootNettyServer {
     public static void main(String[] args) {
         new BootNettyServer().startup();
     }
-    private int port = 1883;
+    private int port = 9527;
     private NioEventLoopGroup bossGroup;
     private NioEventLoopGroup workGroup;
 
@@ -54,6 +54,9 @@ public class BootNettyServer {
                 }
             });
             ChannelFuture f = bootstrap.bind(port).sync();
+            new Thread(() -> {
+
+            }).start();
         }catch (Exception e){
             e.printStackTrace();
         }

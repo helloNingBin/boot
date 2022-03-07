@@ -57,7 +57,7 @@ public class BootChannelInboundHandler extends ChannelInboundHandlerAdapter {
             switch (mqttFixedHeader.messageType()){
                 case PUBLISH:		//	客户端发布消息
                     //	PUBACK报文是对QoS 1等级的PUBLISH报文的响应
-                    System.out.println("123");
+                    System.out.println("mqttMessage:" + mqttMessage);
                     BootMqttMsgBack.puback(channel, mqttMessage);
                     break;
                 case PUBREL:		//	发布释放
