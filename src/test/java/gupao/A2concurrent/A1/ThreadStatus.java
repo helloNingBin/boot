@@ -14,7 +14,7 @@ public class ThreadStatus {
         new Thread(()->{
             while(true){
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.SECONDS.sleep(10);
                     System.out.println("current thread:" + Thread.currentThread().getName() + "==>" + sdf.format(new Date()));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -24,7 +24,9 @@ public class ThreadStatus {
 
         new Thread(()->{
             while(true){
+                System.out.println("synchronized before current thread:" + Thread.currentThread().getName() + "==>" + sdf.format(new Date()));
                 synchronized (ThreadStatus.class){
+                    System.out.println("synchronized after current thread:" + Thread.currentThread().getName() + "==>" + sdf.format(new Date()));
                     try {
                         System.out.println("current thread:" + Thread.currentThread().getName() + "==>" + sdf.format(new Date()));
                         ThreadStatus.class.wait();
@@ -45,7 +47,7 @@ public class ThreadStatus {
             synchronized (BlockDemo.class){
                 while(true){
                     try {
-                        TimeUnit.SECONDS.sleep(10);
+                        TimeUnit.SECONDS.sleep(15);
                         System.out.println("current thread:" + Thread.currentThread().getName() + "==>" + sdf.format(new Date()));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
