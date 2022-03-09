@@ -1,0 +1,5 @@
+1.volatile关键字
+   多线程操作时，每个线程都会把共享变量拷贝到自己的副本，当修改变量时，这个值并不会马上同步到主线程中去，而是会取决于缓存的写策略，这将会出现数据不同步，
+    原子性不一致问题。当加上volatile关键字修饰的变量后，每次修改都会立马同步。可见性
+    可见性指的是当一个线程修改了共享变量后，其他线程能够立即得知这个修改
+    However, the use of volatile is limited to a very restricted set of cases as most of the times atomicity is desired
