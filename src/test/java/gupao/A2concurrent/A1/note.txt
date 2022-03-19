@@ -1,3 +1,18 @@
 1.线程是CPU的最小执行单位单位
 2.线程的创建流程：thread.start()-->JVM(thread.cpp)调用os的create_thread方法创建线程，并start_thread启动线程。
      之后CPU的调度算法会算出该线程分配给哪个CPU，并等待CUP时间片，run方法java给os的一个回调，分配到时间片后就执行。
+3.线程的复位
+    所有抛出InteruptedException异常的方法都有一个特征，阻塞。像Sleep、Wait、Join。
+    Run方法里的代码：  当外部调用interrupt方法时，并不会退出循环，!Thread.currentThread().isInterrupted()还是为True
+                     因为interrupt方法有两个功能，一个是唤醒功能，另一个是更改interrupted从true为false;
+                     唤醒的意义是让线程里的代码知道外部有信息通知了，要去处理相应的逻辑，这时它应该是一个Runnable状态的线程，
+                     interrupted状态应复原为true。
+       while(!Thread.currentThread().isInterrupted()){
+            try {
+                 Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                 //把中断线程的决定权交给run方法的逻辑，这样才是安全的结束线程的方法.在这里可以再次决定线程是否结束。
+                 //因为一调用interrupted方法，线程就马上结束，这样是不安全和不优雅的。代码后台可能有数据要保存之类的，贸然中断会导致数据丢失风险
+                 e.printStackTrace();
+            }
+       }

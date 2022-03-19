@@ -14,5 +14,10 @@ public class AnnotationTest {
         System.out.println(app);
         ApplicationContext app2 = new AnnotationConfigApplicationContext(MyConfig.class);
         System.out.println(app2);
+        try {
+            Thread.currentThread().wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

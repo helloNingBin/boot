@@ -43,7 +43,7 @@ public class FileUtil {
     /**
      *
      * @param fullSourceFileName  全路径
-     * @param targetFileName      仅文件名就可以
+     * @param targetFileName      全路径,但不用带上后缀，输出的是txt
      * @throws IOException
      */
     public static void splitTextFile(String fullSourceFileName,String targetFileName,int mb) throws IOException {
