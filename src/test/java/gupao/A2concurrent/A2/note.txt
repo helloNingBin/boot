@@ -3,3 +3,6 @@
     原子性不一致问题。当加上volatile关键字修饰的变量后，每次修改都会立马同步。可见性
     可见性指的是当一个线程修改了共享变量后，其他线程能够立即得知这个修改
     However, the use of volatile is limited to a very restricted set of cases as most of the times atomicity is desired
+2.head(堆)和stack(栈)
+    栈：放基本变量，和对象地址
+    堆：存放对象
