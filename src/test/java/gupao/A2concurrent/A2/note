@@ -1,0 +1,42 @@
+1.表达式 i++不是原子操作
+   因为这个操作是分为三步的，第一步从内存中读取i的值，第二步i=i+1,第三步把计算结果放加回到内存中
+   这个过程中，可能不是连续的，执行到一半CPU时间片用完了，其它线程也去操作这个i值
+2.在AutoIncre类的例子中
+      /**
+        * 经过测试，不作处理执行完i的值是16000
+        * 加上volatile是19979
+        * 加上syncronized是200000
+        */
+3.synchronized (b)里的b相当于锁的标识，也可以认识是锁的ID吧。想象成带有syncronized的方法或代码块是一间大房子，
+          不同的b值对应一个门，例如b=1，那只能从1号门进去，如果1号门被锁住了，只能在外面排除等里面的人出来。你进入了，也会锁住。
+          同理，如果b是一个固定值，类名，常量等。那这房子就只有一个门，所有人想进入都只能在这门排队
+4.打印类与实例的类结构
+  gupao.A2concurrent.A2.ClassLayoutDemo object internals(类）:
+   OFFSET  SIZE                      TYPE DESCRIPTION                               VALUE
+        0    12                           (object header)                           N/A
+       12     4      java.math.BigDecimal ClassLayoutDemo.b                         N/A
+       16     4   java.lang.StringBuilder ClassLayoutDemo.sb                        N/A
+       20     4                           (loss due to the next object alignment)
+  Instance size: 24 bytes
+  Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+
+  gupao.A2concurrent.A2.ClassLayoutDemo object internals（实例）:
+  1.对象头中的Mark Word（标记字）主要用来表示对象的线程锁状态，另外还可以用来配合GC、存放该对象的hashCode
+  2.Klass Word是一个指向方法区中Class信息的指针，意味着该对象可随时知道自己是哪个Class的实例；
+  3.数组长度也是占用64位（8字节）的空间，这是可选的，只有当本对象是一个数组对象时才会有这个部分；
+  4.对象体是用于保存对象属性和值的主体部分，占用内存空间取决于对象的属性数量和类型；
+  5.对齐字是为了减少堆内存的碎片空间，该结构大小不够8的倍数，则补够8的倍数。
+   OFFSET  SIZE                      TYPE DESCRIPTION                               VALUE
+        0     4                           (object header对象头_markword)            01 00 00 00 (00000001 00000000 00000000 00000000) (1)
+        4     4                           (object header对象头_klassword)           00 00 00 00 (00000000 00000000 00000000 00000000) (0)
+        8     4                           (object header对象头_数组长度)            05 c1 00 20 (00000101 11000001 00000000 00100000) (536920325)
+       12     4      java.math.BigDecimal ClassLayoutDemo.b（对象体）               (object)
+       16     4   java.lang.StringBuilder ClassLayoutDemo.sb（对象体）              (object)
+       20     4                           (loss due to the next object alignment)（对齐字节）
+  Instance size: 24 bytes
+  Space losses: 0 bytes internal + 4 bytes external = 4 bytes total
+  5.synchronized锁的升级
+  我们通常说的通过synchronized实现的同步锁，真实名称叫做重量级锁。但是重量级锁会造成线程排队（串行执行），
+  且会使CPU在用户态和核心态之间频繁切换，所以代价高、效率低。为了提高效率，不会一开始就使用重量级锁，JVM在内部会根据需要，
+  按如下步骤进行锁的升级：无锁状态，偏向锁状态，轻量级锁状态，重量级锁状态。
+
